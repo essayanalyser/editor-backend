@@ -53,6 +53,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'csp.middleware.CSPMiddleware',
 ]
+
 CSP_DEFAULT_SRC = ("self","data:","gap:","https://ssl.gstatic.com","unsafe-eval")
 CSP_CONNECT_SRC = ("self","http://localhost:8000/api/users/")
 CORS_ORIGIN_ALLOW_ALL = True

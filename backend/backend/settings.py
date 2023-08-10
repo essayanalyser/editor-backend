@@ -51,11 +51,11 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'csp.middleware.CSPMiddleware',
+    # 'csp.middleware.CSPMiddleware',
 ]
 
-CSP_DEFAULT_SRC = ("self","data:","gap:","https://ssl.gstatic.com","unsafe-eval")
-CSP_CONNECT_SRC = ("self","http://localhost:8000/api/users/")
+# CSP_DEFAULT_SRC = ("self","data:","gap:","https://ssl.gstatic.com","unsafe-eval")
+# CSP_CONNECT_SRC = ("self","http://localhost:8000/api/users/")
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = [

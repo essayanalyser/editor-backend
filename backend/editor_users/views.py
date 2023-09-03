@@ -26,4 +26,10 @@ class EditorUsersView(APIView):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
-
+        
+    def get(self, request, id):
+        user_list_data = []
+        for detail in EditorUsers.objects.all():
+            if detail.title == id:
+                user_list_data += [{"content":detail.content}] 
+        return Response(user_list_data)

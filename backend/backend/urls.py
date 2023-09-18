@@ -9,5 +9,5 @@ from editor_users import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', views.EditorUsersView.as_view()),             
-    path('api/users/<str:id>', views.EditorUsersView.as_view())             
+    path('api/users/', views.EditorUsersView.as_view())             
 ]

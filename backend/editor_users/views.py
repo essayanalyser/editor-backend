@@ -9,7 +9,7 @@ from .serializers import *
 class EditorUsersView(APIView):
     serializer_class = EditorUsersSerializer
     
-    def get(self, request):
+    def get(self, request, title):
         detail_res = []
         for detail in EditorUsers.objects.all():
             detail_content = []
@@ -21,7 +21,12 @@ class EditorUsersView(APIView):
                 detail_content += [{"title": f'{detail.title}{count}',"content": i}]
                 count+=1
             detail_res += [ {"title": detail.title,"content": detail_content} ]
-        return Response(detail_res)
+        user_list_data = []
+        for detail in detail_res:
+            if detail["title"] == title:
+                user_list_data += [{"content":detail["content"]}] 
+        return Response(user_list_data)
+        # return Response(detail_res)
     
     def post(self, request):
         serializer = EditorUsersSerializer(data=request.data)
@@ -29,7 +34,7 @@ class EditorUsersView(APIView):
             serializer.save()
             return Response(serializer.data)
         
-    # def get(self, request, id):
+    # def get_request(self, request, id):
     #     user_list_data = []
     #     for detail in EditorUsers.objects.all():
     #         if detail.title == id:

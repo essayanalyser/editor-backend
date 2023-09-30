@@ -14,11 +14,19 @@ class EditorUsersView(APIView):
         for detail in EditorUsers.objects.all():
             detail_content = []
             count = 0
+            para = 0
             print(detail)
             detail_content_list = detail.content.split(".")
             print(detail_content_list)
             for i in detail_content_list:
-                detail_content += [{"title": f'{detail.title}{count}',"content": i}]
+                if '<p>' in i or '</p>' in i:
+                    if '<p>' in i:
+                        para+=1
+                    newStr = i.replace("<p>","</p>")
+                    newStr1 = newStr.replace("</p>",'')
+                    detail_content += [{"title": f'{detail.title}p{para}s{count}',"content": newStr1}]
+                else:
+                    detail_content += [{"title": f'{detail.title}p{para}s{count}',"content": i}]
                 count+=1
             detail_res += [ {"title": detail.title,"content": detail_content} ]
         user_list_data = []

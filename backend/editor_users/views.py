@@ -8,7 +8,6 @@ from .serializers import *
 # detail = [ {"title": detail.title,"content": detail.content} for detail in EditorUsers.objects.all()]
 class EditorUsersView(APIView):
     serializer_class = EditorUsersSerializer
-    
     def get(self, request, title):
         detail_res = []
         for detail in EditorUsers.objects.all():
@@ -28,13 +27,14 @@ class EditorUsersView(APIView):
                 else:
                     detail_content += [{"title": f'{detail.title}p{para}s{count}',"content": i}]
                 count+=1
-            detail_res += [ {"title": detail.title,"content": detail_content} ]
+            detail_res += [ {"title": detail.title,"version": detail.version,"content": detail_content} ]
         user_list_data = []
         for detail in detail_res:
             if detail["title"] == title:
+                user_list_data += [{"version":detail["version"]}] 
                 user_list_data += [{"content":detail["content"]}] 
         return Response(user_list_data)
-        # return Response(detail_res)
+
     
     def post(self, request):
         serializer = EditorUsersSerializer(data=request.data)

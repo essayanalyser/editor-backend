@@ -4,4 +4,5 @@ from .models import EditorUsers
 class EditorUsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = EditorUsers
-        fields = ('id' ,'title', 'content')
+        fields = ('title','version','content')
+

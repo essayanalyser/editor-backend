@@ -21,11 +21,12 @@ class EditorUsersView(APIView):
                 if '<p>' in i or '</p>' in i:
                     if '<p>' in i:
                         para+=1
+                        # detail_content += [{"para":para}]
                     newStr = i.replace("<p>","</p>")
-                    newStr1 = newStr.replace("</p>",'')
-                    detail_content += [{"title": f'{detail.title}p{para}s{count}',"content": newStr1}]
+                    newStr1 = newStr.replace("</p>",'').strip()
+                    detail_content += [{"para":para,"content": newStr1}]
                 else:
-                    detail_content += [{"title": f'{detail.title}p{para}s{count}',"content": i}]
+                    detail_content += [{"para":para,"content": i.strip()}]
                 count+=1
             detail_res += [ {"title": detail.title,"version": detail.version,"content": detail_content} ]
         user_list_data = []

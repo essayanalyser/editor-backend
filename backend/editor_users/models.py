@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class EditorUsers(models.Model):
     title = models.CharField(max_length=100,primary_key=True)
-    version = models.IntegerField()
+    version = models.CharField(max_length=2)
     content = models.TextField()
     
     def _str_(self):

@@ -37,6 +37,7 @@ class EditorUsersView(APIView):
 
     
     def post(self, request):
+        print(request)
         serializer = EditorUsersSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()

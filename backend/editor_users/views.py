@@ -12,28 +12,33 @@ class EditorUsersView(APIView):
         detail_res = []
         for detail in EditorUsers.objects.all():
             detail_content = []
+            sentences = []
             count = 0
             para = 0
-            print(detail)
+            # print(detail)
             detail_content_list = detail.content.split(".")
-            print(detail_content_list)
+            # print(detail_content_list)
             for i in detail_content_list:
                 if '<p>' in i or '</p>' in i:
                     if '<p>' in i:
                         para+=1
-                        # detail_content += [{"para":para}]
+                        count=0
+                        sentences = []
                     newStr = i.replace("<p>","</p>")
                     newStr1 = newStr.replace("</p>",'').strip()
-                    detail_content += [{"para":para,"content": newStr1}]
+                    sentences += [{"sentence_id":count,"content":newStr1}]
+                    # detail_content += [{"para":para,"sentences": sentences}]
                 else:
-                    detail_content += [{"para":para,"content": i.strip()}]
+                    sentences += [{"sentence_id":count,"content":i.strip()}]
+                if count == 0:
+                    detail_content += [{"para":para,"sentences": sentences}]
                 count+=1
+            
             detail_res += [ {"title": detail.title,"version": detail.version,"content": detail_content} ]
         user_list_data = []
         for detail in detail_res:
             if detail["title"] == title:
-                user_list_data += [{"version":detail["version"]}] 
-                user_list_data += [{"content":detail["content"]}] 
+                user_list_data += [{"version":detail["version"],"content":detail["content"]}] 
         return Response(user_list_data)
 
     

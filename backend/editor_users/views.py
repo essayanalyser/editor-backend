@@ -46,8 +46,8 @@ class EditorUsersView(APIView):
     def post(self,request):
         print(request.data)
         json = HistoryDataSerializer(data=request.data)
-        for detail in HistoryData.objects.all():
-            print(detail.data)
+        # for detail in HistoryData.objects.all():
+            # print(detail.data)
         if json.is_valid(raise_exception=True):
             json.save()
             return Response(json.data)
@@ -92,11 +92,11 @@ class HistoryDataView(APIView):
                     detail_content += [{"para":para,"sentences": sentences}]
                 count+=1
             
-            detail_res += [ {"title": detail.key.title,"version": detail.data["version"],"content": detail_content} ]
+            detail_res += [ {"title": detail.key.title,"doc_name":detail.doc_name,"version": detail.data["version"],"content": detail_content} ]
         user_list_data = []
         for detail in detail_res:
             if detail["title"] == key:
-                user_list_data += [{"version":detail["version"],"content":detail["content"]}] 
+                user_list_data += [{"doc_name":detail["doc_name"],"version":detail["version"],"content":detail["content"]}] 
         return Response(user_list_data)
 
 
@@ -106,10 +106,3 @@ class HistoryDataView(APIView):
         #     if detail.key.title == key:
         #         my_versions += [{"version":detail.data["version"],"content":detail.data["content"]}]
         
-        
-            
-        
-        
-        
-        
-        # return Response(my_versions)

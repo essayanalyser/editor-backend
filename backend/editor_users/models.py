@@ -9,7 +9,9 @@ class EditorUsers(models.Model):
     
     def _str_(self):
         return self.title
-    
+
 class HistoryData(models.Model):
-    key = models.ForeignKey(EditorUsers,on_delete=models.CASCADE)
-    data = models.JSONField()
+    key = models.ForeignKey(EditorUsers,on_delete=models.CASCADE) 
+    # doc_id = models.BigIntegerField()
+    doc_name = models.CharField(max_length=100)
+    data = models.JSONField() 

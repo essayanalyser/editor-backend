@@ -44,13 +44,12 @@ class EditorUsersView(APIView):
 
     
     def post(self,request):
-        print(request.data)
-        json = HistoryDataSerializer(data=request.data)
-        # for detail in HistoryData.objects.all():
-            # print(detail.data)
-        if json.is_valid(raise_exception=True):
-            json.save()
-            return Response(json.data)
+        serializer = EditorUsersSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+
+            return Response(serializer.data)
+        
         # serializer = EditorUsersSerializer(data=request.data)
         # if serializer.is_valid(raise_exception=True):
         #     serializer.save()
@@ -99,7 +98,14 @@ class HistoryDataView(APIView):
                 user_list_data += [{"doc_name":detail["doc_name"],"version":detail["version"],"content":detail["content"]}] 
         return Response(user_list_data)
 
-
+    def post(self,request):
+        print(request.data)
+        json = HistoryDataSerializer(data=request.data)
+        # for detail in HistoryData.objects.all():
+            # print(detail.data)
+        if json.is_valid(raise_exception=True):
+            json.save()
+            return Response(json.data)
 
         # for detail in HistoryData.objects.all():
         #     print(detail.key.title)

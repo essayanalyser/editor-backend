@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from .serializers import *
 # Create your views here.
     
-# detail = [ {"title": detail.title,"content": detail.content} for detail in EditorUsers.objects.all()]
+# This table is used to register the new users 
 class EditorUsersView(APIView):
     serializer_class = EditorUsersSerializer
     def get(self, request, title):
@@ -50,17 +50,7 @@ class EditorUsersView(APIView):
 
             return Response(serializer.data)
         
-        # serializer = EditorUsersSerializer(data=request.data)
-        # if serializer.is_valid(raise_exception=True):
-        #     serializer.save()
-        #     return Response(serializer.data)
-        
-    # def get_request(self, request, id):
-    #     user_list_data = []
-    #     for detail in EditorUsers.objects.all():
-    #         if detail.title == id:
-    #             user_list_data += [{"content":detail.content}] 
-    #     return Response(user_list_data)
+# Data will be stored in this table reference from the editor_users table
 class HistoryDataView(APIView):
     serializer_class = HistoryDataSerializer
     def get(self, request, key):
@@ -127,8 +117,3 @@ class HistoryDataView(APIView):
             json.save()
             return Response(json.data)
 
-        # for detail in HistoryData.objects.all():
-        #     print(detail.key.title)
-        #     if detail.key.title == key:
-        #         my_versions += [{"version":detail.data["version"],"content":detail.data["content"]}]
-        

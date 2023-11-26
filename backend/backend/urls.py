@@ -10,6 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),     
     path('users/', views.HistoryDataView.as_view()),      
     path('users/<str:key>/', views.HistoryDataView.as_view()),       
+    path('users/<str:key>/<str:doc_name>/<str:version>/', views.HistoryDataView.as_view()),       
     path('api/users/', views.EditorUsersView.as_view()),             
     path('api/users/<str:title>/', views.EditorUsersView.as_view()),
 ]

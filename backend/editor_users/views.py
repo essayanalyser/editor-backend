@@ -131,4 +131,13 @@ class HistoryDataView(APIView):
         #     print(detail.key.title)
         #     if detail.key.title == key:
         #         my_versions += [{"version":detail.data["version"],"content":detail.data["content"]}]
+
+    def delete(self,request,key,doc_name,version):
+        for detail in HistoryData.objects.all():
+            if detail.doc_name == doc_name:
+                if detail.data["version"] == version:
+                    detail.delete()
+                    return Response("200 OK")
         
+        
+

@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from .serializers import *
 # Create your views here.
     
-# This table is used to register the new users 
+# This table is used to register the new users.
 class EditorUsersView(APIView):
     serializer_class = EditorUsersSerializer
     def get(self, request, title):
@@ -53,8 +53,9 @@ class EditorUsersView(APIView):
 # Data will be stored in this table reference from the editor_users table
 class HistoryDataView(APIView):
     serializer_class = HistoryDataSerializer
+
+    # To get data from the database 
     def get(self, request, key):
-        # my_versions = []
         detail_res = []
         for detail in HistoryData.objects.all():
             detail_content = []
@@ -106,8 +107,9 @@ class HistoryDataView(APIView):
             if detail["title"] == key:
                 user_list_data += [{"doc_name":detail["doc_name"],"version":detail["version"],"content":detail["content"]}] 
         return Response(version_manage(user_list_data))
-        # return Response(user_list_data)
+        
 
+    # Post data to database
     def post(self,request):
         print(request.data)
         json = HistoryDataSerializer(data=request.data)
@@ -121,13 +123,22 @@ class HistoryDataView(APIView):
         #     print(detail.key.title)
         #     if detail.key.title == key:
         #         my_versions += [{"version":detail.data["version"],"content":detail.data["content"]}]
-
+    
+    # To delete a specific version
+    # Example url to hit : http://127.0.0.1:8000/users/jaynitjain123@gmail.com/This is document name/0/
     def delete(self,request,key,doc_name,version):
         for detail in HistoryData.objects.all():
             if detail.doc_name == doc_name:
                 if detail.data["version"] == version:
                     detail.delete()
                     return Response("200 OK")
-        
+
+    # To delete a specific document 
+    # Example url to hit : http://127.0.0.1:8000/users/jaynitjain123@gmail.com/This is document name/
+    def delete(self,request,key,doc_name):
+        for detail in HistoryData.objects.all():
+            if detail.doc_name == doc_name:
+                detail.delete()
+                return Response("200 OK")
         
 

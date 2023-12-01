@@ -135,10 +135,10 @@ class HistoryDataView(APIView):
 
     # To delete a specific document 
     # Example url to hit : http://127.0.0.1:8000/users/jaynitjain123@gmail.com/This is document name/
-    def delete(self,request,key,doc_name):
-        for detail in HistoryData.objects.all():
-            if detail.doc_name == doc_name:
-                detail.delete()
-                return Response("200 OK")
+    # def deleteDocument(self,request,key,doc_name):
+    #     for detail in HistoryData.objects.all():
+    #         if detail.doc_name == doc_name:
+    #             detail.delete()
+    #             return Response("200 OK")
         
 

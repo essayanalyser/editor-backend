@@ -75,10 +75,15 @@ class HistoryDataView(APIView):
                         sentences = []
                     newStr = i.replace("<p>","</p>")
                     newStr1 = newStr.replace("</p>",'').strip()
-                    sentences += [{"sentence_id":count,"content":newStr1}]
+                    if '<br>' in i or '&nbsp;' in i:
+                        newStr1 = newStr1.replace("<br>",'').strip()
+                        newStr1 = newStr1.replace("&nbsp;",'').strip()
+                    if newStr1 == '':
+                        break
+                    sentences += [{"sentence_id":count,"content":newStr1+'.'}]
                         # detail_content += [{"para":para,"sentences": sentences}]
                 else:
-                    sentences += [{"sentence_id":count,"content":i.strip()}]
+                    sentences += [{"sentence_id":count,"content":i.strip()+'.'}]
                 if count == 0:
                     detail_content += [{"para":para,"sentences": sentences}]
                 count+=1

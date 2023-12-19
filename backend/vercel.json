@@ -4,7 +4,7 @@
       {
         "src": "backend/wsgi.py",
         "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+        "config": { "maxLambdaSize": "15mb", "runtime": "python4.2" }
       },
       {
         "src": "build_files.sh",
@@ -21,7 +21,7 @@
       },
       {
         "src": "/(.*)",
-        "dest": "projectname/wsgi.py"
+        "dest": "backend/wsgi.py"
       }
     ]
   }

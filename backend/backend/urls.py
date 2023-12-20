@@ -15,6 +15,3 @@ urlpatterns = [
     path('api/users/', views.EditorUsersView.as_view()),             
     path('api/users/<str:title>/', views.EditorUsersView.as_view()),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

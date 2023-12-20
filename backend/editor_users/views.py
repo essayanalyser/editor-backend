@@ -4,7 +4,8 @@ from . models import *
 from rest_framework.response import Response
 from .serializers import *
 # Create your views here.
-    
+
+
 # This table is used to register the new users.
 class EditorUsersView(APIView):
     serializer_class = EditorUsersSerializer

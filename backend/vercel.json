@@ -23,6 +23,5 @@
         "src": "/(.*)",
         "dest": "backend/wsgi.py"
       }
-    ],
-    "outputDirectory" : "staticfiles_build"
+    ]
   }

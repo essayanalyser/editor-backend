@@ -56,7 +56,7 @@ MIDDLEWARE = [
 
 # CSP_DEFAULT_SRC = ("self","data:","gap:","https://ssl.gstatic.com","unsafe-eval")
 # CSP_CONNECT_SRC = ("self","http://localhost:8000/api/users/")
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOWED_ORIGINS = [
     "https://spontaneous-maamoul-79d9dc.netlify.app",

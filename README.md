@@ -2,15 +2,36 @@
 This repository contains the backend of the essay analyser project
 
 To run the backend part:
-Clone the repository and install docker
+Clone the repository and install dar
 On terminal type:
 
 
-**docker pull jayneet/editor-backend:initial**
+**python -m venv dar**
 
-Then run:
+Then run (for virtual environment):
 
 
-**docker run -d -p 8000:8000 jayneet/editor-backend:initial**
+**dar\Scripts\activate.bat**
 
-Then go to localhost:8000/api/users/
+Navigate to backend using:
+
+
+**cd backend**
+
+To dwonload all the dependencies run:
+
+
+**pip install -r requirements.txt**
+
+To run the django script:
+
+
+**python manage.py runserver**
+
+Navigate to http://localhost:8000 to verify if django is running.
+
+
+To deploy the django project on python anywhere:
+1. Create a new account
+2. Clone the project editor-backend
+3. Deploy and check

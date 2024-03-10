@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from . models import *
 from rest_framework.response import Response
 from .serializers import *
+from django.http import HttpResponse
 # Create your views here.
 
 
@@ -117,12 +118,24 @@ class HistoryDataView(APIView):
 
     # Post data to database
     def post(self,request):
-        print(request.data)
+        # Post data to database
+        if not all([request.data.get("key"), request.data.get("doc_name"), request.data.get("data")]):
+            return HttpResponse("Missing data", status=400)
+        max_version = -1
+        if('version' not in request.data.get('data')):
+            for detail in HistoryData.objects.filter(key=request.data.get('key')):
+                if(detail.data['version'] > max_version):
+                    print("here")
+                    max_version = detail.data['version']
+            
+            request.data['data']['version'] = max_version+1
+            
         json = HistoryDataSerializer(data=request.data)
-        # for detail in HistoryData.objects.all():
-            # print(detail.data)
+        
         if json.is_valid(raise_exception=True):
             json.save()
+            for detail in HistoryData.objects.filter(key=request.data['key']):
+                print(detail.data)
             return Response(json.data)
 
         # for detail in HistoryData.objects.all():

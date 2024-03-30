@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-k^mhb=tv20!t9^c0voq-2!n9hch3r!=@6k(jn3ityoz09$7@yx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1",'.vercel.app','.now.sh']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -57,6 +57,7 @@ MIDDLEWARE = [
 # CSP_DEFAULT_SRC = ("self","data:","gap:","https://ssl.gstatic.com","unsafe-eval")
 # CSP_CONNECT_SRC = ("self","http://localhost:8000/api/users/")
 CORS_ORIGIN_ALLOW_ALL = True
+CSRF_TRUSTED_ORIGINS= ["chrome-extension://anfiljiojjimoijjkccpfcplmamelhcm",]
 
 CORS_ALLOW_METHODS = [
     "DELETE",
@@ -138,17 +139,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-
+STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-import os
-STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 # Content Security Policy
 
 CSP_IMG_SRC = ("'self'")
